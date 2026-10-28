@@ -78,6 +78,41 @@ class SoundController {
       // Audio fallback
     }
   }
+
+  public playChocolateSnap() {
+    this.initCtx();
+    if (!this.ctx) return;
+    try {
+      const t = this.ctx.currentTime;
+      // High frequency crisp attack (the acoustic crack)
+      const oscCrack = this.ctx.createOscillator();
+      const gainCrack = this.ctx.createGain();
+      oscCrack.type = 'sawtooth';
+      oscCrack.frequency.setValueAtTime(1800, t);
+      oscCrack.frequency.exponentialRampToValueAtTime(120, t + 0.04);
+      gainCrack.gain.setValueAtTime(0.2, t);
+      gainCrack.gain.exponentialRampToValueAtTime(0.001, t + 0.045);
+      oscCrack.connect(gainCrack);
+      gainCrack.connect(this.ctx.destination);
+      oscCrack.start(t);
+      oscCrack.stop(t + 0.05);
+
+      // Resonant hollow bar body thump
+      const oscBody = this.ctx.createOscillator();
+      const gainBody = this.ctx.createGain();
+      oscBody.type = 'triangle';
+      oscBody.frequency.setValueAtTime(260, t);
+      oscBody.frequency.exponentialRampToValueAtTime(65, t + 0.08);
+      gainBody.gain.setValueAtTime(0.25, t);
+      gainBody.gain.exponentialRampToValueAtTime(0.0001, t + 0.09);
+      oscBody.connect(gainBody);
+      gainBody.connect(this.ctx.destination);
+      oscBody.start(t);
+      oscBody.stop(t + 0.1);
+    } catch {
+      // Audio fallback
+    }
+  }
 }
 
 export const soundManager = new SoundController();

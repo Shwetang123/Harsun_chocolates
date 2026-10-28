@@ -68,7 +68,7 @@ export const Scene3D: React.FC<Scene3DProps> = ({ currentFlavor = 'dark' }) => {
 
     // --- Scene, Camera, Renderer ---
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2('#FAF4EE', 0.02);
+    scene.fog = new THREE.FogExp2('#080605', 0.025);
 
     const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
     camera.position.set(0, 0, 9.0);

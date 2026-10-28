@@ -2,11 +2,11 @@
 
 @layer base {
   :root {
-    --color-cream: #FAF4EE;
+    --color-cream: #FBF3E9;
     --color-cream-card: #FFFFFF;
-    --color-cocoa-900: #1F0F09;
-    --color-cocoa-800: #2C1810;
-    --color-cocoa-700: #3D2217;
+    --color-cocoa-900: #422211;
+    --color-cocoa-800: #4A1702;
+    --color-cocoa-700: #633B28;
     --color-cocoa-600: #583222;
     --color-gold-500: #D49B44;
     --color-gold-400: #E6B562;
@@ -16,18 +16,19 @@
   }
 
   body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--color-cream);
-    color: var(--color-cocoa-800);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Plus Jakarta Sans', sans-serif;
+    background-color: #FBF3E9;
+    color: #4A1702;
     overflow-x: hidden;
   }
 
   h1, h2, h3, .font-display {
-    font-family: 'Playfair Display', serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Playfair Display', sans-serif;
+    letter-spacing: -0.025em;
   }
 
   .font-serif-luxury {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
   }
 
   .font-script {
@@ -35,44 +36,96 @@
   }
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Apple Minimalist */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAF4EE;
+  background: #F5D9C8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D49B44;
-  border-radius: 4px;
+  background: #8D5B3C;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #B88029;
+  background: #D49B44;
 }
 
-/* Glassmorphism & Luxury effects */
+/* Apple MacBook Pro Luxury Glass & Bento Styles */
+.apple-bento-card {
+  background: rgba(81, 49, 34, 0.96);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(27, 19, 14, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-bento-card:hover {
+  border-color: rgba(212, 155, 68, 0.35);
+  box-shadow: 0 25px 60px rgba(27, 19, 14, 0.3), 0 0 35px rgba(212, 155, 68, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.apple-glass-pill {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.apple-glass-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(212, 155, 68, 0.4);
+}
+
+.apple-text-gradient {
+  background: linear-gradient(180deg, #FFFFFF 0%, #E3DDD8 60%, #9F9790 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.apple-subtext-gradient {
+  background: linear-gradient(180deg, #A89F97 0%, #756D66 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.apple-gold-gradient {
+  background: linear-gradient(135deg, #FFF0D4 0%, #F5D394 30%, #D49B44 70%, #9E6F22 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.apple-glow-gold {
+  box-shadow: 0 0 50px -10px rgba(212, 155, 68, 0.3);
+}
+
+/* Backward compatibility for existing panels */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 155, 68, 0.2);
+  background: rgba(22, 16, 13, 0.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #F5EFEB;
 }
 
 .glass-panel-dark {
-  background: rgba(31, 15, 9, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 155, 68, 0.3);
+  background: rgba(12, 9, 7, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(212, 155, 68, 0.25);
+  color: #F5EFEB;
 }
 
 .gold-gradient-text {
-  background: linear-gradient(135deg, #ECC278 0%, #D49B44 50%, #A67324 100%);
+  background: linear-gradient(135deg, #FFF0D4 0%, #ECC278 40%, #D49B44 75%, #A67324 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gold-border-glow {
-  box-shadow: 0 0 25px rgba(212, 155, 68, 0.25);
+  box-shadow: 0 0 30px rgba(212, 155, 68, 0.25);
 }
 
 /* Smooth transitions */
@@ -82,4 +135,413 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #FBF3E9;
+}
+
+/* The palette follows the logo's peach ground, cocoa script, and amber sun. */
+.theme-hero {
+  background: linear-gradient(155deg, #F8E6D8 0%, #F8DED0 65%, #EBC9AF calc(100% - 72px), #422211 100%);
+  color: #4A1702;
+}
+
+.theme-story {
+  background: linear-gradient(180deg, #422211 0%, #583724 calc(100% - 72px), #EBD8C9 100%);
+}
+
+.theme-vision {
+  background: linear-gradient(180deg, #EBD8C9 0%, #FBF3E9 15%, #FAEFE3 100%);
+  color: #4A1702;
+}
+
+.theme-plan {
+  background: linear-gradient(180deg, #FAEFE3 0%, #F3DCCF calc(100% - 72px), #A47A61 100%);
+  color: #4A1702;
+}
+
+.theme-store {
+  background: linear-gradient(180deg, #A47A61 0%, #422211 10%, #583724 calc(100% - 72px), #EBD8C9 100%);
+}
+
+.theme-feedback {
+  background: linear-gradient(180deg, #EBD8C9 0%, #FBF3E9 12%, #FAEFE3 calc(100% - 72px), #422211 100%);
+  color: #4A1702;
+}
+
+.theme-hero .apple-gold-gradient,
+.theme-vision .apple-gold-gradient,
+.theme-feedback .apple-gold-gradient {
+  background: linear-gradient(135deg, #A75118 0%, #8A4219 55%, #C47522 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.theme-feedback > div > div:first-child > span {
+  color: #80552B;
+}
+
+.theme-feedback > div > div:first-child > p {
+  color: #51453B;
+}
+
+.theme-feedback > div > div:first-child > .rounded-2xl {
+  background: rgba(212, 155, 68, 0.15);
+  border-color: rgba(128, 85, 43, 0.25);
+}
+
+.theme-feedback > div > div:first-child > .rounded-2xl p:first-child {
+  color: #6C4525;
+}
+
+.theme-feedback > div > div:first-child > .rounded-2xl p:last-child {
+  color: #51453B;
+}
+
+.theme-feedback > div > div:first-child .aspect-\[4\/3\] {
+  border-color: rgba(71, 50, 35, 0.15);
+}
+
+.theme-store .product-card {
+  background: #62402E;
+}
+
+.theme-story .apple-bento-card {
+  background: rgba(99, 62, 43, 0.94);
+}
+
+/* Diwali details are decorative and never take pointer events from the page. */
+.logo-festive-glow { position: relative; isolation: isolate; }
+.logo-festive-glow::before {
+  content: '';
+  position: absolute;
+  inset: 8px 0;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(235, 157, 59, .33), transparent 70%);
+  filter: blur(14px);
+  pointer-events: none;
+  animation: diwali-glow 6s ease-in-out infinite alternate;
+}
+
+.diwali-light-string {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  display: flex;
+  justify-content: space-around;
+  height: 12px;
+  pointer-events: none;
+}
+.diwali-light-string::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(138, 70, 24, .3);
+}
+.diwali-light-string span {
+  position: relative;
+  top: 2px;
+  width: 5px;
+  height: 8px;
+  border-radius: 50% 50% 65% 65%;
+  background: #EBA743;
+  box-shadow: 0 0 7px 2px rgba(236, 162, 55, .52);
+  animation: diwali-twinkle 3.8s ease-in-out infinite alternate;
+}
+.diwali-light-string span:nth-child(3n) { background: #FFF0C7; }
+.diwali-light-string span:nth-child(4n) { background: #D9802B; }
+
+.diwali-hero-greeting {
+  color: #9B591F;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: .015em;
+}
+.diwali-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.diwali-particles span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #E9A444;
+  box-shadow: 0 0 12px 3px rgba(226, 150, 46, .35);
+  opacity: .55;
+  animation: diwali-float 7s ease-in-out infinite alternate;
+}
+.diwali-particles span:nth-child(1) { left: 7%; top: 17%; animation-delay: -2s; }
+.diwali-particles span:nth-child(2) { left: 26%; top: 11%; animation-delay: -5s; }
+.diwali-particles span:nth-child(3) { left: 45%; top: 24%; animation-delay: -3s; }
+.diwali-particles span:nth-child(4) { left: 72%; top: 10%; animation-delay: -6s; }
+.diwali-particles span:nth-child(5) { left: 89%; top: 28%; animation-delay: -1s; }
+.diwali-particles span:nth-child(6) { left: 15%; top: 71%; animation-delay: -4s; }
+.diwali-particles span:nth-child(7) { left: 58%; top: 69%; animation-delay: -2.5s; }
+.diwali-particles span:nth-child(8) { left: 78%; top: 81%; animation-delay: -5.5s; }
+.diwali-particles span:nth-child(9) { left: 95%; top: 62%; animation-delay: -3.5s; }
+
+.festive-section { position: relative; overflow: hidden; }
+.festive-section > section { position: relative; z-index: 2; }
+.diwali-frame { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.diwali-rangoli {
+  position: absolute;
+  top: 100px;
+  right: -80px;
+  width: 250px;
+  height: 250px;
+  border: 1px solid rgba(242, 185, 91, .22);
+  border-radius: 50%;
+  box-shadow: 0 0 0 15px rgba(242, 185, 91, .035), 0 0 0 31px rgba(242, 185, 91, .035), inset 0 0 0 28px rgba(242, 185, 91, .025);
+  opacity: .8;
+}
+.diwali-rangoli::before,
+.diwali-rangoli::after {
+  content: '';
+  position: absolute;
+  inset: 34px;
+  border: 1px solid rgba(242, 185, 91, .22);
+  border-radius: 26%;
+  transform: rotate(45deg);
+}
+.diwali-rangoli::after { inset: 63px; transform: rotate(0); border-radius: 50%; }
+.diwali-garland {
+  position: absolute;
+  top: 0;
+  width: 96px;
+  height: 78px;
+  border-radius: 0 0 50% 50%;
+  border-bottom: 6px dotted rgba(230, 151, 49, .65);
+  filter: drop-shadow(0 0 8px rgba(244, 171, 66, .25));
+}
+.diwali-garland-left { left: 12%; transform: rotate(9deg); }
+.diwali-garland-right { right: 12%; transform: rotate(-9deg); }
+.diwali-diya {
+  position: absolute;
+  bottom: 48px;
+  width: 88px;
+  height: 82px;
+  filter: drop-shadow(0 0 15px rgba(255, 175, 51, .46));
+}
+.diwali-diya-left { left: max(2%, calc((100% - 1400px) / 2)); }
+.diwali-diya-right { right: max(2%, calc((100% - 1400px) / 2)); }
+.diwali-bowl {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 0;
+  height: 25px;
+  border-radius: 5px 5px 45px 45px;
+  background: linear-gradient(180deg, #E9A84D, #B85B23 52%, #793414);
+  border-top: 3px solid #F7D78A;
+  box-shadow: inset 0 -5px 8px rgba(66, 34, 17, .25), 0 5px 12px rgba(32, 13, 5, .25);
+}
+.diwali-flame {
+  position: absolute;
+  left: 36px;
+  top: 3px;
+  width: 18px;
+  height: 46px;
+  border-radius: 70% 10% 60% 40%;
+  background: radial-gradient(ellipse at 45% 75%, #FFF9D7 0 12%, #FFE491 24%, #F6A52D 65%, rgba(240, 107, 27, .15) 100%);
+  transform: rotate(8deg);
+  box-shadow: 0 0 15px 7px rgba(255, 171, 47, .3), 0 0 38px 16px rgba(255, 157, 45, .18);
+  transform-origin: center bottom;
+  animation: diwali-flame 2.4s ease-in-out infinite alternate;
+}
+.diwali-diya-right .diwali-flame { animation-delay: -1.2s; }
+
+.theme-store .product-card { border-color: rgba(244, 188, 96, .22); }
+.theme-store .product-card:hover { border-color: rgba(255, 208, 127, .65); box-shadow: 0 22px 55px rgba(20, 8, 3, .35), 0 0 28px rgba(230, 152, 52, .18); }
+.theme-store .product-card::after {
+  content: '✦';
+  position: absolute;
+  z-index: 6;
+  top: 12px;
+  right: 15px;
+  color: #F9D58A;
+  font-size: 19px;
+  text-shadow: 0 0 14px rgba(255, 199, 91, .85);
+  pointer-events: none;
+  animation: diwali-twinkle 4.5s ease-in-out infinite alternate;
+}
+
+.diwali-gift-wrap { position: absolute; z-index: 30; top: -35px; left: -25px; width: 105px; text-align: center; }
+.diwali-gift {
+  display: block;
+  position: relative;
+  width: 90px;
+  height: 92px;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: transform .3s ease;
+}
+.diwali-gift:hover { transform: translateY(-5px) rotate(-3deg); }
+.diwali-gift:focus-visible, .diwali-surprise button:focus-visible { outline: 2px solid #F5D394; outline-offset: 4px; }
+.diwali-gift-glow { position: absolute; inset: 15px; border-radius: 50%; background: rgba(242, 180, 73, .5); filter: blur(20px); animation: diwali-glow 3s ease-in-out infinite alternate; }
+.diwali-gift-base {
+  position: absolute;
+  left: 10px;
+  bottom: 4px;
+  width: 70px;
+  height: 64px;
+  overflow: hidden;
+  border: 2px solid #F3C979;
+  border-radius: 5px 5px 10px 10px;
+  background: linear-gradient(135deg, #8B3B1E, #B56338 54%, #713019);
+  box-shadow: 0 12px 20px rgba(63, 22, 7, .32), inset -8px -6px 14px rgba(59, 23, 9, .26);
+}
+.diwali-gift-ribbon-vertical { position: absolute; left: 28px; top: 0; bottom: 0; width: 13px; background: linear-gradient(90deg, #B96D1C, #F9D98C, #B96D1C); }
+.diwali-gift-ribbon-horizontal { position: absolute; left: 0; right: 0; top: 29px; height: 13px; background: linear-gradient(180deg, #BA7423, #F6D47F, #B96D1C); }
+.diwali-gift-lid {
+  position: absolute;
+  left: 5px;
+  top: 18px;
+  width: 80px;
+  height: 18px;
+  border: 2px solid #F5D58C;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #B46637, #89401E);
+  box-shadow: 0 5px 7px rgba(67, 23, 8, .25);
+  transform-origin: 80% 80%;
+  transition: transform .55s cubic-bezier(.2,.85,.2,1);
+}
+.diwali-gift.is-open .diwali-gift-lid { transform: translate(-11px, -34px) rotate(-16deg); }
+.diwali-gift-lid-ribbon { position: absolute; top: 0; bottom: 0; left: 32px; width: 13px; background: linear-gradient(90deg, #C4832E, #F9D98C, #C4832E); }
+.diwali-gift-bow { position: absolute; top: -21px; width: 23px; height: 24px; border: 6px solid #E5AC52; border-radius: 65% 50% 65% 50%; }
+.diwali-gift-bow-left { left: 19px; transform: rotate(-34deg); }
+.diwali-gift-bow-right { right: 18px; transform: rotate(34deg); }
+.diwali-gift-hint { display: block; width: max-content; max-width: 150px; margin: 3px 0 0 -21px; padding: 3px 9px; border-radius: 99px; background: rgba(74, 23, 2, .9); color: #FFF3DE; font-size: 10px; font-weight: 700; box-shadow: 0 4px 12px rgba(74, 23, 2, .18); }
+.diwali-gift-burst { position: absolute; top: 35px; left: 50px; pointer-events: none; }
+.diwali-gift-burst span { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #FFE294; box-shadow: 0 0 10px 4px rgba(247, 193, 79, .7); animation: diwali-burst 1.2s ease-out both; animation-delay: calc(var(--spark-index) * 35ms); --spark-angle: calc(var(--spark-index) * 45deg); }
+.diwali-surprise { position: absolute; top: 113px; left: 2px; width: min(292px, calc(100vw - 48px)); padding: 22px; border: 1px solid rgba(255, 211, 137, .6); border-radius: 18px; background: rgba(66, 34, 17, .97); box-shadow: 0 20px 42px rgba(44, 17, 7, .35), 0 0 28px rgba(244, 170, 62, .22); color: #FFF2E4; text-align: left; backdrop-filter: blur(12px); }
+.diwali-surprise-close { position: absolute; top: 9px; right: 9px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #F7DDAE; cursor: pointer; }
+.diwali-surprise-close:hover { background: rgba(255, 255, 255, .12); }
+.diwali-surprise-eyebrow { display: block; margin-bottom: 8px; color: #F5D394; font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.diwali-surprise strong { display: block; max-width: 220px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 25px; line-height: 1.05; }
+.diwali-surprise p { margin-top: 10px; color: #E7D4C6; font-size: 12px; line-height: 1.5; }
+.diwali-surprise-cta { display: inline-flex; align-items: center; gap: 7px; margin-top: 16px; padding: 9px 12px; border-radius: 99px; background: #F3D495; color: #4A1702; font-size: 11px; font-weight: 800; cursor: pointer; }
+.diwali-surprise-cta:hover { background: #FFE4AB; }
+
+@keyframes diwali-twinkle { from { opacity: .55; filter: brightness(.85); } to { opacity: 1; filter: brightness(1.12); } }
+@keyframes diwali-glow { from { opacity: .5; transform: scale(.93); } to { opacity: 1; transform: scale(1.06); } }
+@keyframes diwali-float { from { transform: translateY(7px); opacity: .3; } to { transform: translateY(-17px); opacity: .7; } }
+@keyframes diwali-flame { from { transform: rotate(4deg) scale(.9, .96); opacity: .9; } to { transform: rotate(12deg) scale(1.06, 1.05); opacity: 1; } }
+@keyframes diwali-burst { from { transform: rotate(var(--spark-angle)) translateY(0); opacity: 1; } to { transform: rotate(var(--spark-angle)) translateY(-92px); opacity: 0; } }
+
+@media (max-width: 639px) {
+  .diwali-light-string span:nth-child(even) { display: none; }
+  .diwali-garland { opacity: .45; }
+  .diwali-rangoli { width: 170px; height: 170px; right: -90px; }
+  .diwali-diya { transform: scale(.72); transform-origin: center bottom; bottom: 29px; }
+  .diwali-diya-left { left: -13px; }
+  .diwali-diya-right { right: -13px; }
+  .diwali-gift-wrap { top: -18px; left: 5px; }
+  .diwali-gift { transform: scale(.82); transform-origin: top left; }
+  .diwali-gift:hover { transform: scale(.82); }
+  .diwali-gift-hint { margin-top: -11px; margin-left: -5px; }
+  .diwali-surprise { top: 93px; left: 0; }
+}
+
+/* Quiet motion accents shared across the pre-launch story. */
+.ambient-orb {
+  animation: ambient-breathe 10s ease-in-out infinite alternate;
+}
+
+@keyframes ambient-breathe {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -6px;
+  height: 1px;
+  background: #C77A22;
+  transition: right 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  right: 0;
+}
+
+.product-card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --shine-x: 50%;
+  --shine-y: 50%;
+  transform: perspective(1100px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transform-style: preserve-3d;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), border-color 380ms, box-shadow 380ms;
+}
+
+.product-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(360px circle at var(--shine-x) var(--shine-y), rgba(245, 211, 148, 0.10), transparent 62%);
+  transition: opacity 350ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover {
+    transform: perspective(1100px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(-5px);
+  }
+  .product-card:hover .product-shine { opacity: 1; }
+}
+
+.feedback-choice {
+  transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
+}
+
+.feedback-choice:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 155, 68, 0.12);
+}
+
+.feedback-choice:has(input:focus-visible) {
+  outline: 2px solid #F5D394;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .ambient-orb { animation: none; }
+  .logo-festive-glow::before,
+  .diwali-light-string span,
+  .diwali-particles span,
+  .diwali-flame,
+  .diwali-gift-glow,
+  .diwali-gift-burst span,
+  .theme-store .product-card::after { animation: none !important; }
+  .diwali-gift-lid { transition: none; }
+  .nav-link::after,
+  .product-card,
+  .product-shine,
+  .feedback-choice { transition-duration: 0.01ms !important; }
+  .product-card,
+  .product-card:hover,
+  .apple-bento-card:hover,
+  .feedback-choice:hover { transform: none !important; }
+}
+
+@media (hover: none) {
+  .product-card:hover { transform: none; }
 }

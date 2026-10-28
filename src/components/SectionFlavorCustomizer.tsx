@@ -1,6 +1,6 @@
 import React from 'react';
-import { Plus, Check, SlidersHorizontal } from 'lucide-react';
-import { FLAVORS, type FlavorConfig } from './Scene3D';
+import { Plus, Check, Volume2, Eye } from 'lucide-react';
+import { FLAVORS, type FlavorConfig } from '../data/flavors';
 import { soundManager } from '../utils/audio';
 
 interface SectionFlavorCustomizerProps {
@@ -19,40 +19,50 @@ export const SectionFlavorCustomizer: React.FC<SectionFlavorCustomizerProps> = (
   const flavorDetails: Record<
     string,
     {
+      finishTag: string;
       percentage: string;
       origin: string;
       profile: string;
       pairings: string;
-      wrapperImg: string;
+      acousticDecibel: string;
+      temperGloss: string;
     }
   > = {
     dark: {
-      percentage: '70% Cocoa',
-      origin: 'Single Origin Ghana',
-      profile: 'Bittersweet, smoky wood notes with roasted espresso finish',
-      pairings: 'Black coffee, vintage red wine, sea salt caramel',
-      wrapperImg: '/brand/product-bar-dark.png',
+      finishTag: 'Midnight Noir (Space Black equivalent)',
+      percentage: '85% Criollo Cocoa',
+      origin: 'Single Origin Kerala & Ecuador',
+      profile: 'Bittersweet dark molasses, roasted espresso, and black cherry finish',
+      pairings: 'Neat Islay Scotch, black cold brew, Fleur de Sel',
+      acousticDecibel: '94 dB Snap',
+      temperGloss: 'Mirror Temper Polish',
     },
     milk: {
-      percentage: '42% Cocoa',
-      origin: 'Alpine Milk & Ivory Coast',
-      profile: 'Velvety cream, wild honey, and toasted shortbread undertones',
-      pairings: 'Earl Grey tea, roasted hazelnuts, warm brioche',
-      wrapperImg: '/brand/product-bar-milk.png',
+      finishTag: 'Velvet Gold (Silver / Starlight equivalent)',
+      percentage: '45% Grand Cru Cocoa',
+      origin: 'A2 Grass-Fed Dairy & Ivory Coast',
+      profile: 'Wild heather honey, warm browned butter, and silky shortbread',
+      pairings: 'Smoked Earl Grey, roasted macadamia, crisp champagne',
+      acousticDecibel: '86 dB Snap',
+      temperGloss: 'Velvet Satin Finish',
     },
     almond: {
-      percentage: '55% Cocoa',
-      origin: 'California Roasted Almonds',
-      profile: 'Crunchy caramelized whole nuts enveloped in balanced cocoa',
-      pairings: 'Espresso macchiato, aged cheddar, dried cranberries',
-      wrapperImg: '/brand/product-bar-almond.png',
+      finishTag: 'Roasted Amber Praline',
+      percentage: '60% Roasted Cocoa',
+      origin: 'Californian Nonpareil Almonds',
+      profile: 'Double-caramelized roasted nuts folded into dense aromatic chocolate',
+      pairings: 'Aged Tawny Port, salted butter brioche, dark espresso',
+      acousticDecibel: '91 dB Crunch',
+      temperGloss: 'Textured Crystal Sheen',
     },
     ruby: {
-      percentage: '47% Cocoa',
-      origin: 'Ruby Cocoa Beans, Brazil',
-      profile: 'Luscious natural berry sourness with fresh yogurt tart finish',
-      pairings: 'Sparkling rosé, fresh raspberries, pistachio cream',
-      wrapperImg: '/brand/product-bar-milk.png',
+      finishTag: 'Rose Quartz Botanical',
+      percentage: '52% Unfermented Ruby Bean',
+      origin: 'Specialty Brazilian Cacao',
+      profile: 'Naturally sour red berries, hibiscus florals, and creamy yogurt tang',
+      pairings: 'Sparkling Rosé, fresh raspberries, Iranian pistachios',
+      acousticDecibel: '89 dB Snap',
+      temperGloss: 'Iridescent Ruby Luster',
     },
   };
 
@@ -60,107 +70,133 @@ export const SectionFlavorCustomizer: React.FC<SectionFlavorCustomizerProps> = (
   const activeObj = FLAVORS[currentFlavor] || FLAVORS.dark;
 
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-20 pointer-events-auto">
-      <div className="glass-panel p-8 sm:p-12 rounded-3xl border-2 border-[#D49B44]/30 shadow-2xl space-y-8">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#D49B44]/20 pb-6">
-          <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#B88029]">
-              <SlidersHorizontal className="w-3.5 h-3.5" />
-              <span>Interactive 3D Bar Inspector</span>
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-[#2C1810]">
-              Customize Chocolate &bull; Watch 3D Realtime
-            </h3>
+    <section id="closer-look" className="relative py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto z-20">
+      {/* Apple Section Header */}
+      <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-neutral-400 text-xs font-semibold uppercase tracking-widest">
+          <Eye className="w-3.5 h-3.5 text-[#D49B44]" />
+          <span>Explore the Collection</span>
+        </div>
+        <h2 className="text-4xl sm:text-6xl font-bold tracking-tight text-white">
+          Take a closer look. <br />
+          <span className="apple-gold-gradient">Four finishes. Zero compromises.</span>
+        </h2>
+        <p className="text-base sm:text-lg text-neutral-400">
+          Select a chocolate below to explore its origin, tasting notes, and finish.
+        </p>
+      </div>
+
+      {/* Main Apple Bento Panel */}
+      <div className="apple-bento-card p-8 sm:p-12 rounded-3xl relative overflow-hidden space-y-10">
+        {/* Apple Style Finish Pill Switchers */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-8">
+          <div>
+            <span className="text-xs uppercase tracking-wider text-neutral-500 font-semibold block">
+              Current Selection
+            </span>
+            <span className="text-xl font-bold text-white flex items-center gap-2">
+              <span>{activeObj.name}</span>
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-white/10 text-[#F5D394] font-normal">
+                {selectedDetails.finishTag}
+              </span>
+            </span>
           </div>
 
-          <span className="text-xs text-[#8A5A44] font-serif-luxury italic">
-            Select a flavor to morph the 3D model above
-          </span>
-        </div>
-
-        {/* 4 Flavor Buttons */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {flavorList.map((f) => {
-            const isSelected = f.id === currentFlavor;
-            return (
-              <button
-                key={f.id}
-                onClick={() => {
-                  soundManager.playSweetPop();
-                  onSelectFlavor(f.id);
-                }}
-                className={`p-4 rounded-2xl text-left transition-all duration-300 relative border ${
-                  isSelected
-                    ? 'bg-[#2C1810] text-[#FFF8F0] border-[#D49B44] shadow-lg scale-102 ring-2 ring-[#D49B44]/30'
-                    : 'bg-white/70 hover:bg-white text-[#2C1810] border-[#D49B44]/20 hover:border-[#D49B44]'
-                }`}
-              >
-                {isSelected && (
-                  <span className="absolute top-3 right-3 w-5 h-5 rounded-full bg-[#D49B44] text-white flex items-center justify-center text-xs">
-                    <Check className="w-3 h-3" />
-                  </span>
-                )}
-                <div
-                  className="w-7 h-7 rounded-full mb-3 shadow-xs border border-white/50"
-                  style={{ backgroundColor: f.color }}
-                />
-                <span className="block text-xs font-semibold tracking-wider uppercase mb-1">
-                  {f.name}
-                </span>
-                <span
-                  className={`text-[11px] font-medium ${
-                    isSelected ? 'text-[#F5D394]' : 'text-[#8A5A44]'
+          {/* Color Switcher Pills (Apple Space Black / Silver style) */}
+          <div className="flex items-center gap-3">
+            {flavorList.map((f) => {
+              const isSelected = f.id === currentFlavor;
+              return (
+                <button
+                  key={f.id}
+                  onClick={() => {
+                    soundManager.playSweetPop();
+                    onSelectFlavor(f.id);
+                  }}
+                  className={`flex items-center gap-2 px-3.5 py-2 rounded-full border transition-all duration-300 cursor-pointer ${
+                    isSelected
+                      ? 'bg-white/15 border-[#D49B44] text-white scale-105 shadow-md'
+                      : 'bg-white/5 border-white/10 text-neutral-400 hover:text-white hover:border-white/20'
                   }`}
+                  title={f.name}
                 >
-                  {flavorDetails[f.id]?.percentage || 'Signature Blend'}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Selected Flavor Detail Specs */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-[#D49B44]/20 text-xs">
-          <div className="p-4 rounded-xl bg-white/60 space-y-1">
-            <span className="block font-bold uppercase tracking-wider text-[#8A5A44]">
-              Cocoa Origin &amp; Purity
-            </span>
-            <p className="text-sm font-semibold text-[#2C1810]">{selectedDetails.origin}</p>
-            <p className="text-[11px] text-[#583222]">{selectedDetails.percentage}</p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-white/60 space-y-1">
-            <span className="block font-bold uppercase tracking-wider text-[#8A5A44]">
-              Tasting Aroma Profile
-            </span>
-            <p className="text-sm font-semibold text-[#2C1810]">{selectedDetails.profile}</p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-white/60 space-y-1">
-            <span className="block font-bold uppercase tracking-wider text-[#8A5A44]">
-              Ideal Pairings
-            </span>
-            <p className="text-sm font-semibold text-[#2C1810]">{selectedDetails.pairings}</p>
+                  <span
+                    className="w-4 h-4 rounded-full border border-white/30 shadow-xs"
+                    style={{ backgroundColor: f.color }}
+                  />
+                  <span className="text-xs font-medium hidden sm:inline">{f.name.split(' ')[0]}</span>
+                  {isSelected && <Check className="w-3 h-3 text-[#F5D394]" />}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Add to Bag CTA */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-          <p className="text-xs text-[#8A5A44] italic">
-            * Artisanal small-batch craft. Packed in fresh airtight barrier foil.
-          </p>
+        {/* Feature Hotspots Grid (Apple Spec Callouts) */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-xs">
+          <div className="p-5 rounded-2xl bg-[#0E0A08]/80 border border-white/10 space-y-1.5">
+            <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-500 block">
+              Origin &amp; Purity
+            </span>
+            <p className="text-base font-bold text-white">{selectedDetails.origin}</p>
+            <p className="text-neutral-400">{selectedDetails.percentage}</p>
+          </div>
 
+          <div className="p-5 rounded-2xl bg-[#0E0A08]/80 border border-white/10 space-y-1.5">
+            <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-500 block">
+              Aroma Top-Notes
+            </span>
+            <p className="text-xs text-neutral-200 leading-relaxed">{selectedDetails.profile}</p>
+          </div>
+
+          <div className="p-5 rounded-2xl bg-[#0E0A08]/80 border border-white/10 space-y-1.5">
+            <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-500 block">
+              Sensory Metrics
+            </span>
+            <div className="flex items-center justify-between text-neutral-300">
+              <span>Acoustic Snap</span>
+              <span className="text-[#F5D394] font-mono font-bold">
+                {selectedDetails.acousticDecibel}
+              </span>
+            </div>
+            <div className="flex items-center justify-between text-neutral-300">
+              <span>Temper Finish</span>
+              <span className="text-white font-mono">{selectedDetails.temperGloss}</span>
+            </div>
+          </div>
+
+          <div className="p-5 rounded-2xl bg-[#0E0A08]/80 border border-white/10 space-y-1.5">
+            <span className="text-[10px] uppercase font-bold tracking-wider text-neutral-500 block">
+              Sommelier Pairing
+            </span>
+            <p className="text-xs text-neutral-300 leading-relaxed">{selectedDetails.pairings}</p>
+          </div>
+        </div>
+
+        {/* Interactive Actions Row */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
           <button
             onClick={() => {
-              soundManager.playSweetPop();
-              onAddToBag(activeObj);
+              soundManager.playChocolateSnap();
             }}
-            className="w-full sm:w-auto px-7 py-3 rounded-full bg-gradient-to-r from-[#2C1810] to-[#4A2618] hover:from-[#3D2217] hover:to-[#5A3120] text-[#FFF8F0] font-semibold text-xs uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 border border-[#D49B44]/40"
+            className="flex items-center gap-2 text-xs text-neutral-400 hover:text-[#F5D394] transition-colors cursor-pointer"
           >
-            <Plus className="w-4 h-4 text-[#F5D394]" />
-            <span>Add {activeObj.name} to Gift Bag</span>
+            <Volume2 className="w-4 h-4 text-[#D49B44]" />
+            <span>Click to test snap frequency of {activeObj.name}</span>
           </button>
+
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <button
+              onClick={() => {
+                soundManager.playSweetPop();
+                onAddToBag(activeObj);
+              }}
+              className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#D49B44] to-[#F5D394] hover:from-[#E5A853] hover:to-[#FFF0D4] text-[#120A05] font-semibold text-xs uppercase tracking-wider shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <Plus className="w-4 h-4 text-[#120A05]" />
+              <span>Add 1x {activeObj.name} to Bag</span>
+            </button>
+          </div>
         </div>
       </div>
     </section>

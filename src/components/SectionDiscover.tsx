@@ -9,16 +9,16 @@ export const SectionDiscover: React.FC = () => {
     >
       {/* Title & Section Tag */}
       <div className="w-full lg:w-1/2 z-20 space-y-4 mb-8 sm:mb-12">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/70 backdrop-blur-sm border border-[#D49B44]/30 pointer-events-auto">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 backdrop-blur-md border border-white/10 pointer-events-auto">
           <Layers className="w-3.5 h-3.5 text-[#D49B44]" />
-          <span className="text-xs uppercase font-bold tracking-widest text-[#583222]">
-            Section 01 &bull; Anatomy of Perfection
+          <span className="text-xs uppercase font-bold tracking-widest text-[#F5D394]">
+            Anatomy of Perfection
           </span>
         </div>
-        <h2 className="text-3xl sm:text-5xl font-bold text-[#2C1810] leading-tight">
-          Crafted to the <span className="gold-gradient-text italic">Exact Snap.</span>
+        <h2 className="text-4xl sm:text-6xl font-bold text-white leading-tight">
+          Crafted to the <span className="apple-gold-gradient italic">Exact Snap.</span>
         </h2>
-        <p className="text-base sm:text-lg text-[#583222] max-w-lg leading-relaxed">
+        <p className="text-base sm:text-lg text-neutral-300 max-w-lg leading-relaxed">
           As you scroll, notice how each individual chocolate square gently separates. We temper our
           cocoa to microscopic crystal alignment for that unmistakable, satisfying clean snap and
           silky melt.
@@ -27,34 +27,34 @@ export const SectionDiscover: React.FC = () => {
 
       {/* Floating feature annotations */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl z-20 pointer-events-auto">
-        <div className="glass-panel p-6 rounded-2xl space-y-3 hover:border-[#D49B44] transition-all duration-300 hover:shadow-lg group">
-          <div className="w-10 h-10 rounded-xl bg-[#2C1810] text-[#F5D394] flex items-center justify-center group-hover:scale-110 transition-transform">
+        <div className="apple-bento-card p-6 rounded-2xl space-y-3 group">
+          <div className="w-10 h-10 rounded-xl bg-white/10 text-[#F5D394] flex items-center justify-center group-hover:scale-110 transition-transform">
             <Flame className="w-5 h-5" />
           </div>
-          <h3 className="text-lg font-bold text-[#2C1810]">Micro-Tempered Finish</h3>
-          <p className="text-sm text-[#583222] leading-relaxed">
+          <h3 className="text-lg font-bold text-white">Micro-Tempered Finish</h3>
+          <p className="text-sm text-neutral-300 leading-relaxed">
             Formed at precisely 31.5°C to achieve a glossy sheen, zero blooming, and a crisp acoustic
             snap in every bite.
           </p>
         </div>
 
-        <div className="glass-panel p-6 rounded-2xl space-y-3 hover:border-[#D49B44] transition-all duration-300 hover:shadow-lg group">
-          <div className="w-10 h-10 rounded-xl bg-[#2C1810] text-[#ECC0C5] flex items-center justify-center group-hover:scale-110 transition-transform">
+        <div className="apple-bento-card p-6 rounded-2xl space-y-3 group">
+          <div className="w-10 h-10 rounded-xl bg-white/10 text-[#ECC0C5] flex items-center justify-center group-hover:scale-110 transition-transform">
             <Sparkles className="w-5 h-5" />
           </div>
-          <h3 className="text-lg font-bold text-[#2C1810]">Velvety Emulsion</h3>
-          <p className="text-sm text-[#583222] leading-relaxed">
-            Conched for 48 uninterrupted hours to reduce cocoa particles to under 18 microns, yielding
+          <h3 className="text-lg font-bold text-white">Velvety Emulsion</h3>
+          <p className="text-sm text-neutral-300 leading-relaxed">
+            Conched for 72 uninterrupted hours to reduce cocoa particles to under 14 microns, yielding
             effortless oral warmth melt.
           </p>
         </div>
 
-        <div className="glass-panel p-6 rounded-2xl space-y-3 hover:border-[#D49B44] transition-all duration-300 hover:shadow-lg group">
-          <div className="w-10 h-10 rounded-xl bg-[#2C1810] text-[#D49B44] flex items-center justify-center group-hover:scale-110 transition-transform">
+        <div className="apple-bento-card p-6 rounded-2xl space-y-3 group">
+          <div className="w-10 h-10 rounded-xl bg-white/10 text-[#D49B44] flex items-center justify-center group-hover:scale-110 transition-transform">
             <ShieldCheck className="w-5 h-5" />
           </div>
-          <h3 className="text-lg font-bold text-[#2C1810]">Single Origin Quality</h3>
-          <p className="text-sm text-[#583222] leading-relaxed">
+          <h3 className="text-lg font-bold text-white">Single Origin Quality</h3>
+          <p className="text-sm text-neutral-300 leading-relaxed">
             Pure single-origin cocoa beans blended with pure cocoa butter. No hydrogenated oils, no
             artificial preservatives.
           </p>

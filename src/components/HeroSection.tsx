@@ -1,123 +1,45 @@
-import React from 'react';
-import { ArrowDown, Sparkles, Heart, Compass } from 'lucide-react';
-import { soundManager } from '../utils/audio';
+import { useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, MessageCircle, Sparkles } from 'lucide-react';
+import { FestiveGift, FestiveParticles } from './DiwaliDecor';
 
-interface HeroSectionProps {
-  onExplore: () => void;
-  onDiscoverStory: () => void;
-}
+interface Props { onExplore: () => void; onShareFeedback: () => void }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onExplore, onDiscoverStory }) => {
+export function HeroSection({ onExplore, onShareFeedback }: Props) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 48]);
+  const auraY = useTransform(scrollYProgress, [0, 1], [0, -54]);
+  const enter = (delay: number, y = 24) => ({
+    initial: reduced ? false as const : { opacity: 0, y },
+    animate: { opacity: 1, y: 0 },
+    transition: reduced ? { duration: 0 } : { duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] as const },
+  });
+
   return (
-    <section
-      id="hero"
-      className="relative min-h-[92vh] flex items-center justify-between pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden pointer-events-none"
-    >
-      {/* Background warm radial aura */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-[#F2D7B3]/40 via-[#E8B4B8]/20 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
-
-      {/* Content Column (Left on Desktop, Full on Mobile) */}
-      <div className="w-full lg:w-1/2 z-20 space-y-6 pt-4 sm:pt-8">
-        {/* Brand identity emblem pill */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-[#D49B44]/30 shadow-xs pointer-events-auto">
-          <Sparkles className="w-3.5 h-3.5 text-[#D49B44]" />
-          <span className="text-xs uppercase font-bold tracking-widest text-[#583222]">
-            Artisanal Confectionery
-          </span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#D49B44]" />
-          <span className="text-xs font-serif-luxury italic text-[#8A5A44]">
-            Harish &amp; Sunita
-          </span>
+    <section ref={sectionRef} id="hero" className="theme-hero relative overflow-hidden px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+      <FestiveParticles />
+      <motion.div style={{ y: reduced ? 0 : auraY }} className="ambient-orb absolute right-[-10%] top-0 w-[550px] h-[550px] rounded-full bg-[#D49B44]/10 blur-3xl pointer-events-none" />
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 items-center gap-12 relative">
+        <div className="space-y-7">
+          <motion.div {...enter(0.05, 14)} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#B8692B]/25 bg-[#E9BB91]/20 text-[#874719] text-xs font-bold uppercase tracking-widest"><Sparkles className="w-4 h-4" /> A brand idea in the making</motion.div>
+          <motion.p {...enter(0.12, 12)} className="diwali-hero-greeting">Celebrate the Festival of Lights with something sweet.</motion.p>
+          <motion.h1 {...enter(0.18)} className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.08] text-[#4A1702]">Something sweet is <span className="apple-gold-gradient italic">taking shape.</span></motion.h1>
+          <motion.p {...enter(0.34)} className="text-lg text-[#624636] leading-relaxed max-w-xl">We are imagining HarSun Chocolates: thoughtful chocolate bars, handmade treats, and gifts inspired by family. We are still planning, and your honest opinion can help us decide what to make first.</motion.p>
+          <motion.div {...enter(0.48)} className="flex flex-wrap gap-3">
+            <motion.button whileHover={reduced ? undefined : { y: -3, scale: 1.02 }} whileTap={reduced ? undefined : { scale: 0.98 }} onClick={onShareFeedback} className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#4A1702] text-[#FFF1E5] text-sm font-bold cursor-pointer hover:bg-[#713819] transition-all"><MessageCircle className="w-4 h-4" /> Share your opinion</motion.button>
+            <motion.button whileHover={reduced ? undefined : { y: -3 }} whileTap={reduced ? undefined : { scale: 0.98 }} onClick={onExplore} className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-[#4A1702]/25 bg-white/35 text-[#4A1702] text-sm font-semibold cursor-pointer hover:bg-white/65 transition-colors group">Explore our ideas <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" /></motion.button>
+          </motion.div>
+          <motion.p {...enter(0.6, 12)} className="text-xs text-[#765B4B]">Pre-launch concept · Products and details may change based on your feedback.</motion.p>
         </div>
-
-        {/* Official Brand Logo with seamless multiply blend */}
-        <div className="pointer-events-auto">
-          <img
-            src="/brand/harsun-logo-hero.png"
-            alt="HarSun Chocolates - Two Names. One Sweet Dream."
-            className="w-full max-w-sm sm:max-w-md h-auto object-contain mix-blend-multiply select-none"
-          />
-        </div>
-
-        {/* Main Headline */}
-        <div className="space-y-3">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#2C1810] leading-[1.12]">
-            A Little Bite of <span className="gold-gradient-text italic font-serif-luxury">Happiness.</span>
-          </h1>
-          <p className="text-base sm:text-lg text-[#583222] font-normal leading-relaxed max-w-lg">
-            Handcrafted with love. Made for every sweet moment. From silky everyday treats to bespoke
-            handcrafted truffles and luxury gift boxes.
-          </p>
-        </div>
-
-        {/* Two CTAs */}
-        <div className="flex flex-wrap items-center gap-4 pt-2 pointer-events-auto">
-          <button
-            onClick={() => {
-              soundManager.playSweetPop();
-              onExplore();
-            }}
-            className="px-7 py-3.5 rounded-full bg-gradient-to-r from-[#2C1810] via-[#3E2116] to-[#2C1810] hover:from-[#3D2217] hover:to-[#552E1E] text-[#FFF8F0] font-semibold text-xs uppercase tracking-widest shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2.5 border border-[#D49B44]/30 group cursor-pointer"
-          >
-            <span>Explore Chocolates</span>
-            <Compass className="w-4 h-4 text-[#F5D394] group-hover:rotate-45 transition-transform" />
-          </button>
-
-          <button
-            onClick={() => {
-              soundManager.playSweetPop();
-              onDiscoverStory();
-            }}
-            className="px-7 py-3.5 rounded-full bg-white/80 hover:bg-white text-[#2C1810] font-semibold text-xs uppercase tracking-widest shadow-xs hover:shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-2 border border-[#D49B44]/40 group cursor-pointer"
-          >
-            <Heart className="w-4 h-4 text-[#DE9AA2] fill-[#DE9AA2]/30 group-hover:scale-110 transition-transform" />
-            <span>Discover Our Story</span>
-          </button>
-        </div>
-
-        {/* Brand Core Pillars Mini Badges */}
-        <div className="pt-6 border-t border-[#D49B44]/20 grid grid-cols-2 sm:grid-cols-4 gap-4 pointer-events-auto">
-          <div>
-            <span className="block text-xs font-bold text-[#2C1810]">100% Pure</span>
-            <span className="text-[11px] text-[#8A5A44]">Cocoa Butter</span>
-          </div>
-          <div>
-            <span className="block text-xs font-bold text-[#2C1810]">Handmade</span>
-            <span className="text-[11px] text-[#8A5A44]">In Small Batches</span>
-          </div>
-          <div>
-            <span className="block text-xs font-bold text-[#2C1810]">Luxury Gifting</span>
-            <span className="text-[11px] text-[#8A5A44]">Bespoke Boxes</span>
-          </div>
-          <div>
-            <span className="block text-xs font-bold text-[#2C1810]">Everyday Joy</span>
-            <span className="text-[11px] text-[#8A5A44]">Affordable Luxury</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Right Column (Reserved for the 3D Canvas Chocolate Bar) */}
-      <div className="hidden lg:flex w-1/2 h-[550px] items-center justify-center relative pointer-events-none">
-        {/* Desktop interactive hover hint */}
-        <div className="absolute bottom-6 right-6 px-3.5 py-1.5 rounded-full bg-white/70 backdrop-blur-md border border-[#D49B44]/20 text-[11px] text-[#8A5A44] pointer-events-auto flex items-center gap-2 shadow-xs">
-          <span className="w-2 h-2 rounded-full bg-[#D49B44] animate-ping" />
-          Interactive 3D Bar &bull; Move mouse to rotate
-        </div>
-      </div>
-
-      {/* Scroll Down Indicator */}
-      <div
-        onClick={() => {
-          soundManager.playSweetPop();
-          onExplore();
-        }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 pointer-events-auto cursor-pointer opacity-80 hover:opacity-100 transition-opacity"
-      >
-        <span className="text-[10px] uppercase font-semibold tracking-widest text-[#8A5A44]">
-          Scroll to Unwrap Story
-        </span>
-        <ArrowDown className="w-4 h-4 text-[#D49B44] animate-bounce" />
+        <motion.div initial={reduced ? false : { opacity: 0, scale: 0.94, rotate: 2 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={reduced ? { duration: 0 } : { duration: 1.1, delay: 0.25, ease: [0.22, 1, 0.36, 1] }} className="relative max-w-xl mx-auto lg:mr-0">
+          <div className="absolute inset-8 rounded-full bg-[#D49B44]/15 blur-3xl" />
+          <motion.img style={{ y: reduced ? 0 : imageY }} src="/brand/editorial/hero-chocolate.jpg" alt="Artisan chocolate bars with blush wrapping and almonds in a HarSun concept still life" fetchPriority="high" decoding="async" width="1536" height="1024" className="relative w-full aspect-[3/2] rounded-3xl border border-[#4A1702]/15 shadow-2xl object-cover object-center" />
+          <FestiveGift onShareFeedback={onShareFeedback} />
+          <motion.div initial={reduced ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={reduced ? { duration: 0 } : { duration: 0.65, delay: 0.85 }} className="absolute -bottom-5 left-5 right-5 sm:left-auto sm:right-[-16px] sm:w-60 rounded-2xl border border-white/15 bg-[#4A2818]/95 backdrop-blur-lg p-4 shadow-xl"><span className="text-[#F5D394] text-xs font-bold uppercase tracking-widest">Your voice matters</span><p className="text-sm text-neutral-200 mt-1">Help shape what HarSun becomes.</p></motion.div>
+        </motion.div>
       </div>
     </section>
   );
-};
+}
